@@ -7,14 +7,21 @@ import './App.css';
 
 class App extends Component {
    state = {
-    contacts: [
-      {id: 'id-1', name: 'Rosie Simpson', number: '459-122-56'},
-      {id: 'id-2', name: 'Hermione Kline', number: '443-839-12'},
-      {id: 'id-3', name: 'Eden Clements', number: '645-147-79'},
-      {id: 'id-4', name: 'Annie Copeland', number: '227-951-26'},
-    ],
+    contacts: [],
     filter: '',
    }
+   componentDidMount(){
+     const contacts = localStorage.getItem('contacts');
+     const contactParsel = JSON.parse(contacts);
+      this.setState({contacts:contactParsel})
+   }
+
+  componentDidUpdate(prevProps,prevState){
+
+if (this.state.contacts !==prevState.contacts ) {
+ localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+}
+  }
   
   formSubmitHandler =({ name, number })=>{
     if(this.dontAddContacts(name)){
