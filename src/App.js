@@ -8,7 +8,7 @@ import './App.css';
 class App extends Component {
    state = {
     contacts: [],
-    filter: '',
+    filter: ' ',
    }
    componentDidMount(){
      const contacts = localStorage.getItem('contacts');
